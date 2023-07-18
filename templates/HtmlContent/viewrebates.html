@@ -1,0 +1,49 @@
+{% extends 'HtmlContent/nav.html' %}
+{% block content %}
+
+<div class="content-wrapper">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        
+        <div class="card">
+        <h5 class="card-header">View Rebates</h5>
+            <div class="table-responsive text-nowrap">
+            <table class="table">
+                <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Customer</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Company</th>
+                </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                {% for dt in data %}  
+                  
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ dt.customer }}</td>
+                            <td>{{ dt.rebate }}</td>
+                            <td>{{ dt.rebatedate }}</td>
+                            <td>{{ dt.parent }}</td>
+                        
+                        </tr>
+                 
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td class="text-danger fw-bolder">Total :</td>
+                    <td class="text-danger fw-bold">{{ total }}</td>
+                    <td>-</td>
+                    <td>-</td>
+                
+                </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+        <!--/ Bootstrap Table with Header Dark -->
+    </div>
+</div>
+
+{% endblock %}

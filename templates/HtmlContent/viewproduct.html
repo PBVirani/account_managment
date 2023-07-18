@@ -1,0 +1,39 @@
+{% extends 'HtmlContent/nav.html' %}
+{% block content %}
+<div class="content-wrapper">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="card">
+            <h5 class="card-header">View Product</h5>
+            <div class="table-responsive text-nowrap">
+            <table class="table">
+                <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Product</th>
+                    <th>Product Number</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                {% for dt in data %}
+                    <tr>
+                        <td>1</td>
+                        <td>{{ dt.product }}</td>
+                        <td>{{ dt.productnumber }}</td>
+                        <td>{{ dt.price }}</td>
+                        <td>
+                            <a href="editproductdetails/{{ dt.id }}" type="button" style="color:white" class="btn btn-icon btn-primary">
+                                <span class="tf-icons bx bx-edit-alt"></span>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        </div>
+        <!--/ Bootstrap Table with Header Dark -->
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'HtmlContent/nav.html' %}
+{% block content %}
+
+<div class="invoice-container" id="GFG">
+  {% for dt in order %}
+    <div class="invoice-header">
+      <div class="company-info">
+       {% for cmp in company %} 
+        <h1>{{ cmp.company }}</h1>
+        <p>{{ cmp.address }}</p>
+        <p>{{ cmp.contact }}</p>
+        <p>{{ cmp.email }}</p>
+       {% endfor %}
+      </div>
+      
+      <div class="invoice-info">
+        
+        <p><b>Invoice #: INV{{ dt.orderid }}</b></p>
+        <p>Date: {{ dt.date }}</p>
+        
+      </div>
+    </div>
+    <div class="invoice-details">
+      <div class="buyer-info">
+        {% for c in customer %}
+        <div class="buyer-company">
+          <p><b>Customer : {{ c.company }}</b></p>
+          <p>Buyer Name  : {{ c.customer }}</p>
+          <p>Address  : {{ c.address }} - {{ c.pincode }}</p>
+          <p>Phone    :  {{ c.contact }}</p>
+        </div>{% endfor %}
+        <!-- <div class="buyer-contact">
+          <p>Buyer Name</p>
+          <p>Email: buyer@company.com</p>
+          <p>Phone: +9876543210</p>
+        </div> -->
+        
+      </div>
+      <table class="invoice-table">
+        <thead>
+          <tr>
+            <th>SR. No.</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in dt.product %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.Product }}</td>
+            <td>{{ i.Quantity }}</td>
+            <td>{{ i.Price }}</td>
+            <td>{{ i.Total }}</td>
+          </tr>
+          {% endfor %}
+          <tr>
+            <td>-</td>
+            <td><strong>Total</strong></td>
+            <td>-</td>
+            <td>-</td>
+            <td>{{ dt.Total }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- <div class="invoice-total">
+      <p><strong>Total:</strong> $350</p>
+    </div> -->
+  </div>
+  
+  <div class="content-wrapper">
+  
+  <button class="btn btn-outline-secondary" id="printbutton" onclick="printPage()">Print Invoice</button>
+
+  {% endfor %}
+</div>
+  
+{% endblock %}

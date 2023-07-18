@@ -1,0 +1,154 @@
+{% extends 'HtmlContent/nav.html' %}
+{% block content %}
+<div class="content-wrapper">
+    <!-- Content -->
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+<div class="col-xl">
+    <div class="card mb-4">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0" id="demo">Add Order</h5>
+        <small class="text-muted float-end">Company Name</small>
+      </div>
+      <div class="card-body">
+        <form action="/addorder" method="POST">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label class="form-label" for="basic-icon-default-fullname">Order Name</label>
+            <div class="input-group input-group-merge">
+              <span id="basic-icon-default-fullname2" class="input-group-text">
+                <i class="bx bx-user"></i>
+              </span>
+              <input
+                type="text"
+                class="form-control"
+                id="Order"
+                placeholder="Order Name"
+                aria-label="Order Name"
+                name ="order"
+                aria-describedby="basic-icon-default-fullname2"
+              />
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlSelect1" class="form-label">Company</label>
+            <select class="form-select" id="customer" name = "customer" aria-label="Default select example">
+              <option selected>Select Customer</option>
+              {% for dt in data %}
+                <option value="{{ dt.company }}">{{ dt.customer }} - {{ dt.company }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="html5-date-input" class="col-md-2 col-form-label" name="date">Date</label>
+            <div class="col-md-12">
+              <input class="form-control" type="date" id="orderdate" name="orderdate" />
+            </div>
+          </div>
+
+          <input type="text" id="productsdata" name="jsondata" hidden>
+
+          <div class="mb-3">
+            <label for="html5-date-input" class="col-md-2 col-form-label">Products</label>
+            <div class="col-md-12">
+              <table class="table" >
+                <thead class="table-dark">
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </tr>
+                </thead>
+                <tbody class="table-border-bottom-0"  id="tableBody">
+                  
+                </tbody>
+              </table>
+              </div>
+            </div>
+          
+          <div class="mb-3">
+            <label for="html5-date-input" class="col-md-2 col-form-label">Add Product</label>
+            <div class="row"> 
+                <div class="col-md-4 mb-3">
+                  <select class="form-select" id="productselect" aria-label="Default select example">
+                    <option selected>Select Product</option>
+                    {% for dt in product %}
+                      <option value="{{dt.product }}">{{ dt.product }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <input class="form-control" type="number" id="quantity" placeholder="Quantity"/>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <input class="form-control" type="number" id="price" placeholder="Price"/>
+                </div>
+                <div class="col-md-1 mb-3">
+                  <input class="btn btn-primary" type="button" value="Add Item" onclick="saveproduct()"/>
+                </div>
+              </div>
+          </div>
+             
+          <button type="submit" class="btn btn-primary">Save Order</button>
+        </form>
+      </div>
+    </div>
+
+  <script>
+    function saveproduct(){
+      
+      // Get the input field value
+      var inputValue1 = document.getElementById('productselect').value;
+      var inputValue2 = document.getElementById('quantity').value;
+      var inputValue3 = document.getElementById('price').value;
+      
+      // Create a new table row
+      var newRow = document.createElement('tr');
+      var newData = document.createElement('td');
+      newData.textContent = inputValue1;
+      newRow.appendChild(newData);
+
+      var newData1 = document.createElement('td');
+      newData1.textContent = inputValue2;
+      newRow.appendChild(newData1);
+
+      var newData2 = document.createElement('td');
+      newData2.textContent = inputValue3;
+      newRow.appendChild(newData2);
+
+      var newData3 = document.createElement('td');
+      newData3.textContent = inputValue3 * inputValue2;
+      newRow.appendChild(newData3);
+      
+      // Append the new row to the table body
+      var tableBody = document.getElementById('tableBody');
+      tableBody.appendChild(newRow);
+      
+      // Clear the input field
+      document.getElementById('productselect').value = '';
+      document.getElementById('quantity').value = '';
+      document.getElementById('price').value = '';
+
+      var table = document.getElementById('tableBody');
+      var rows = table.querySelectorAll('tr');
+
+      var tableData = [];
+      rows.forEach(function(row) {
+        var cells = row.querySelectorAll('td');
+        var rowData = [];
+        cells.forEach(function(cell) {
+          rowData.push(cell.textContent);
+        });
+        tableData.push(rowData);
+      });
+
+      var jsonData = JSON.stringify(tableData);
+      
+      document.getElementById('productsdata').value = jsonData;
+
+    }
+
+  </script>
+{% endblock %}

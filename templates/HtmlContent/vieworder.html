@@ -1,0 +1,48 @@
+{% extends 'HtmlContent/nav.html' %}
+{% block content %}
+<div class="content-wrapper">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="card">
+            <h5 class="card-header">View Orders</h5>
+            <div class="table-responsive text-nowrap">
+            <table class="table">
+                <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Order</th>
+                    <th>Company</th>
+                    <th>Date</th>
+                    <th>Total Bill</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                {% for dt in order %}  
+                    <tr>
+                        <td>1</td>
+                        <td>{{ dt.order }}</td>
+                        <td>{{ dt.customer }}</td>
+                        <td>{{ dt.date }}</td>
+                        <td>{{ dt.Total }}</td>
+                        
+                        <!-- <td><span class="badge rounded-pill bg-danger">Cancel</span>
+                            <span class="badge rounded-pill bg-secondary">Pendding</span>
+                            <span class="badge rounded-pill bg-success">Completed</span></td> -->
+                        <td>
+                            <a href ="vieworderdetails/{{dt.customer}}/{{dt.orderid}}" type="button" style="color:white" class="btn btn-icon btn-success">
+                                <span class="tf-icons bx bx-show-alt"></span>
+                            </a>
+                            <a href="editorderdetails/{{dt.orderid}}" type="button" style="color:white" class="btn btn-icon btn-primary">
+                                <span class="tf-icons bx bx-edit-alt"></span>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        </div>
+        <!--/ Bootstrap Table with Header Dark -->
+    </div>
+</div>
+{% endblock %}
