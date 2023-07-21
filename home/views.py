@@ -514,6 +514,19 @@ class login(View):
             message="Invalid Credentials!!  Please ChecK your Data"
             return render(request, self.template_name,{'message':message}) 
 
+class changecompany(View):
+    template_name = 'HtmlContent/index.html'
+    def get(self,request):
+        return render(request, self.template_name) 
+    
+    def post(self,request):
+        try:
+            request.session['company'] =  request.POST.get('company')
+            return HttpResponseRedirect('/')
+        except:
+            message="Invalid Credentials!!  Please ChecK your Data"
+            return render(request, self.template_name,{'message':message}) 
+        
 def logout(request):
     try:
         request.session.flush()

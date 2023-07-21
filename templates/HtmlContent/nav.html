@@ -335,6 +335,7 @@
               </ul>
             </li>
 
+            
           </ul>
         </aside>
         <!-- / Menu -->
@@ -415,7 +416,16 @@
                       </a>
                     </li>
 
-                  
+                    <li>
+                      <i class="bx"></i>
+                      <button
+                      type="button"
+                      class="btn btn-none"
+                      data-bs-toggle="modal"
+                      data-bs-target="#backDropModal1">
+                            Change Company
+                          </button>
+                    </li>
                     <li>
                       <a class="dropdown-item" href="login">
                         <i class="bx bx-power-off me-2"></i>
@@ -428,7 +438,40 @@
               </ul>
             </div>
           </nav>
-
+          <div class="modal fade" id="backDropModal1" data-bs-backdrop="static" tabindex="-1">
+            <div class="modal-dialog">
+              <form class="modal-content" action="/changecompany" method="POST">
+                {% csrf_token %}
+                <div class="modal-header">
+                  <h5 class="modal-title" id="backDropModalTitle">Change Company</h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col mb-3">
+                      <label for="nameBackdrop" class="form-label">Name</label>
+                      <select class="form-select" id="company" name = "company" aria-label="Default select example">
+                          <option value="Ajanta"> Ajanta</option>
+                          <option value="Jay Khodiyar"> Jay Khodiyar</option>
+                      </select>
+                    </div>
+                  </div>
+                 
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    Close
+                  </button>
+                  <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
           <!-- / Navbar -->
           {% block content %}
           {% endblock %}

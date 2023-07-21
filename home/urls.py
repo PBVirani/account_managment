@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path 
 from django.contrib.auth.decorators import login_required
 from . import views
-from home.views import Renderhomepage , addproductpage , viewproductpage, editproductdetails , addcustomerpage , viewcustomerpage, editcustomerdetails , vieworderpage , editorderdetails , addorderpage , addexpensepage , editexpensedetails , viewexpensepage , profiledetails , login , vieworderdetails , editproduct , editorder , editexpense ,editcustomer , viewrebates
+from home.views import Renderhomepage , addproductpage , viewproductpage, editproductdetails , addcustomerpage , viewcustomerpage, editcustomerdetails , vieworderpage , editorderdetails , addorderpage , addexpensepage , editexpensedetails , viewexpensepage , profiledetails , login , vieworderdetails , editproduct , editorder , editexpense ,editcustomer , viewrebates ,changecompany
 
 urlpatterns = [
     path('', Renderhomepage.as_view(), name="Renderhomepage"),
@@ -29,6 +29,7 @@ urlpatterns = [
     path('viewexpense', viewexpensepage.as_view(), name="viewexpense"),
     path('editexpensedetails/<id>', editexpensedetails.as_view(), name="editexpensedetails"),
     path('editexpense', editexpense.as_view(), name="editexpense"),
+    path('changecompany', changecompany.as_view(), name="changecompany"),
 
     path('profile', profiledetails.as_view(), name="profile"),
     path('login', login.as_view(), name="login"),
