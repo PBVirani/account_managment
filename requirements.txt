@@ -93,7 +93,7 @@ typing_extensions==4.5.0
 tzdata==2022.6
 tzlocal==4.3
 uritemplate==4.1.1
-urllib3==1.26.13
+urllib3==1.26.17
 validators==0.20.0
 virtualenv==20.16.7
 watchdog==3.0.0
